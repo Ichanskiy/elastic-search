@@ -19,8 +19,8 @@ public interface TwitService {
 
     List<Twit> searchByAndAuthorNameAndTaggedEmails(String authorName, List<String> taggedEmails);
 
-    List<String> searchByTitlePrefix(String titlePrefix);
+    List<String> predictionByTitlePrefix(String titlePrefix);
 
-    Map<String, Double> countOfAuthorsTwitsBetweenDate(ZonedDateTime from, ZonedDateTime to);
+    Map<String, Double> authorsToCountOfTwitsBetweenDate(ZonedDateTime startDate, ZonedDateTime endDate);
 
 }

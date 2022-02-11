@@ -1,0 +1,21 @@
+elasticsearch:
+    connect:
+        timeout: 10000
+    host: localhost
+    port: 9200
+    protocol: http
+    socket:
+        timeout: 60000
+
+logging:
+    file: elastic-search.log
+    file.max-history: 0
+    level:
+        org:
+            hibernate: ERROR
+            hibernate.SQL: error
+            springframework:
+                web: ERROR
+    path: classpath:logs/
+server:
+    port: 9090

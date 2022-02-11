@@ -43,7 +43,7 @@ public class TwitController {
 
     @GetMapping("/titlePrediction")
     public List<String> searchByTitlePrefix(@RequestParam String title) {
-        return twitService.searchByTitlePrefix(title);
+        return twitService.predictionByTitlePrefix(title);
     }
 
     @GetMapping("/byAuthorNameAndTaggedEmails")
@@ -53,9 +53,9 @@ public class TwitController {
     }
 
     @GetMapping("/countOfAuthorsTwitsByPeriod")
-    public Map<String, Double> countOfAuthorsTwitsBetweenDate(@RequestParam ZonedDateTime from,
-                                                              @RequestParam ZonedDateTime to) {
-        return twitService.countOfAuthorsTwitsBetweenDate(from, to);
+    public Map<String, Double> countOfAuthorsTwitsBetweenDate(@RequestParam ZonedDateTime startDate,
+                                                              @RequestParam ZonedDateTime endDate) {
+        return twitService.authorsToCountOfTwitsBetweenDate(startDate, endDate);
     }
 
 }

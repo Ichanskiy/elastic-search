@@ -101,7 +101,7 @@ public class TwitServiceImpl implements TwitService {
     }
 
     @SneakyThrows
-    public List<String> searchByTitlePrefix(String titlePrefix) {
+    public List<String> predictionByTitlePrefix(String titlePrefix) {
         final String titleSuggestionName = "title_suggestion";
         SearchRequest searchRequest = new SearchRequest(TWIT_INDEX);
         CompletionSuggestionBuilder suggestBuilder = new CompletionSuggestionBuilder("title")
@@ -127,9 +127,9 @@ public class TwitServiceImpl implements TwitService {
     }
 
     @SneakyThrows
-    public Map<String, Double> countOfAuthorsTwitsBetweenDate(ZonedDateTime from, ZonedDateTime to) {
+    public Map<String, Double> authorsToCountOfTwitsBetweenDate(ZonedDateTime startDate, ZonedDateTime endDate) {
         final String authorAggregation = "aggregation_by_author";
-        final String subAggregationName = "current_year";
+        final String subAggregationName = "date_aggregation";
         SearchRequest searchRequest = new SearchRequest(TWIT_INDEX);
 
         TermsAggregationBuilder aggregationByAuthor = AggregationBuilders
@@ -138,7 +138,7 @@ public class TwitServiceImpl implements TwitService {
 
         aggregationByAuthor.subAggregation(AggregationBuilders
                 .dateRange(subAggregationName)
-                .addRange(from, to)
+                .addRange(startDate, endDate)
                 .field("createdAt"));
 
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
